@@ -25,6 +25,7 @@ namespace ReversiRestApi
         public Kleur[,] Bord { get; set; }
         public Kleur AandeBeurt { get; set; }
         public Kleur NietAanDeBeurt => AandeBeurt == Kleur.Wit ? Kleur.Zwart : Kleur.Wit;
+        
         public Spel()
         {
             Bord = new Kleur[8, 8];
@@ -32,7 +33,7 @@ namespace ReversiRestApi
             AandeBeurt = Kleur.Zwart;
             VulMetGeen();
             ZetBeginStenen();
-            PrintBord();
+            //PrintBord();
         }
 
         private void ZetBeginStenen()
@@ -129,12 +130,12 @@ namespace ReversiRestApi
         {
             if (rijZet < 0 || rijZet > 7) return false;
             if (kolomZet < 0 || kolomZet > 7) return false;
-            if (!stenenWordenOmgedraaid(rijZet, kolomZet)) return false;
+            if (!StenenWordenOmgedraaid(rijZet, kolomZet)) return false;
 
             return Bord[rijZet, kolomZet] == Kleur.Geen;
         }
 
-        private bool stenenWordenOmgedraaid(int rijZet, int kolomZet)
+        private bool StenenWordenOmgedraaid(int rijZet, int kolomZet)
         {
             //Voor elke steen, controleer of er een steen van eigen kleur aan de andere kant zit
             int omgedraaideStenen = 0;
@@ -145,13 +146,13 @@ namespace ReversiRestApi
                 //Controleer of er stenen van een andere kleur om de positie zitten
                 if(!opBord(mogelijkeRij, mogelijkeKolom) || Bord[mogelijkeRij, mogelijkeKolom] != NietAanDeBeurt) continue;
                 //Als dat het geval is, tel de stenen
-                omgedraaideStenen += berekenOmdraaiendeStenen(mogelijkeRij, mogelijkeKolom, kantY, kantX).Count;
+                omgedraaideStenen += BerekenOmdraaiendeStenen(mogelijkeRij, mogelijkeKolom, kantY, kantX).Count;
             }
             //Als er minimaal 1 steen wordt omgedraaid
             return omgedraaideStenen > 0;
         }
 
-        private void draaiStenenOm(int rijZet, int kolomZet)
+        private void DraaiStenenOm(int rijZet, int kolomZet)
         {
             //Draai eerst de steen zelf om
             Bord[rijZet, kolomZet] = AandeBeurt;
@@ -163,7 +164,7 @@ namespace ReversiRestApi
                 //Controleer of er stenen van een andere kleur om de positie zitten
                 if(!opBord(mogelijkeRij, mogelijkeKolom) || Bord[mogelijkeRij, mogelijkeKolom] != NietAanDeBeurt) continue;
                 //Als dat het geval is, zoek al die stenen op 
-                var stenen = berekenOmdraaiendeStenen(mogelijkeRij, mogelijkeKolom, kantY, kantX);
+                var stenen = BerekenOmdraaiendeStenen(mogelijkeRij, mogelijkeKolom, kantY, kantX);
                 foreach (var (steenRij, steenKolom) in stenen)
                 {
                     //En draai ze om naar de kleur van de speler
@@ -172,7 +173,7 @@ namespace ReversiRestApi
             }
         }
 
-        private List<(int, int)> berekenOmdraaiendeStenen(int beginRij, int beginKolom, int rijRichting, int kolomRichting)
+        private List<(int, int)> BerekenOmdraaiendeStenen(int beginRij, int beginKolom, int rijRichting, int kolomRichting)
         {
             var x = beginKolom;
             var y = beginRij;
@@ -208,7 +209,7 @@ namespace ReversiRestApi
         public bool DoeZet(int rijZet, int kolomZet)
         {
             if (!ZetMogelijk(rijZet, kolomZet)) return false;
-            draaiStenenOm(rijZet, kolomZet);
+            DraaiStenenOm(rijZet, kolomZet);
             AandeBeurt = NietAanDeBeurt; 
             return true;
         }

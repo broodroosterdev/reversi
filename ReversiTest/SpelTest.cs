@@ -14,8 +14,8 @@ namespace ReversiTest
         {
             // Arrange
             Spel spel = new Spel();
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //                  v
             // 0 0 0 0 0 0 0 0 0
             // 1 0 0 0 0 0 0 0 0
             // 2 0 0 0 0 0 0 0 0
@@ -24,7 +24,7 @@ namespace ReversiTest
             // 5 0 0 0 0 0 0 0 0
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
-            // 1 <
+            //                   <
             // Act
             spel.AandeBeurt = Kleur.Wit;
             var actual = spel.ZetMogelijk(8, 8);
@@ -58,8 +58,8 @@ namespace ReversiTest
         {
             // Arrange
             Spel spel = new Spel();
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //         v
             // 0 0 0 0 0 0 0 0 0
             // 1 0 0 0 0 0 0 0 0
             // 2 0 0 0 1 0 0 0 0 <
@@ -81,8 +81,8 @@ namespace ReversiTest
             Spel spel = new Spel();
             spel.Bord[1, 3] = Kleur.Wit;
             spel.Bord[2, 3] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //         v
             // 0 0 0 0 2 0 0 0 0 <
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -105,8 +105,8 @@ namespace ReversiTest
             Spel spel = new Spel();
             spel.Bord[1, 3] = Kleur.Wit;
             spel.Bord[2, 3] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //         v
             // 0 0 0 0 1 0 0 0 0 <
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -133,8 +133,8 @@ namespace ReversiTest
             spel.Bord[5, 3] = Kleur.Wit;
             spel.Bord[6, 3] = Kleur.Wit;
             spel.Bord[7, 3] = Kleur.Zwart;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //         v
             // 0 0 0 0 2 0 0 0 0 <
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -161,8 +161,8 @@ namespace ReversiTest
             spel.Bord[5, 3] = Kleur.Wit;
             spel.Bord[6, 3] = Kleur.Wit;
             spel.Bord[7, 3] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //         v
             // 0 0 0 0 2 0 0 0 0 <
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -184,8 +184,8 @@ namespace ReversiTest
             Spel spel = new Spel();
             spel.Bord[4, 5] = Kleur.Wit;
             spel.Bord[4, 6] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //                 v
             // 0 0 0 0 2 0 0 0 0
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -207,8 +207,8 @@ namespace ReversiTest
             Spel spel = new Spel();
             spel.Bord[4, 5] = Kleur.Wit;
             spel.Bord[4, 6] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //                 v
             // 0 0 0 0 1 0 0 0 0
             // 1 0 0 0 1 0 0 0 0
             // 2 0 0 0 1 0 0 0 0
@@ -235,8 +235,8 @@ namespace ReversiTest
             spel.Bord[4, 4] = Kleur.Wit;
             spel.Bord[4, 5] = Kleur.Wit;
             spel.Bord[4, 6] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //                 v
             // 0 0 0 0 0 0 0 0 0
             // 1 0 0 0 0 0 0 0 0
             // 2 0 0 0 0 0 0 0 0
@@ -263,8 +263,8 @@ namespace ReversiTest
             spel.Bord[4, 4] = Kleur.Wit;
             spel.Bord[4, 5] = Kleur.Wit;
             spel.Bord[4, 6] = Kleur.Wit;
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //                 v
             // 0 0 0 0 0 0 0 0 0
             // 1 0 0 0 0 0 0 0 0
             // 2 0 0 0 0 0 0 0 0
@@ -294,8 +294,8 @@ namespace ReversiTest
         {
             // Arrange
             Spel spel = new Spel();
-            // 0 1 2 3 4 5 6 7
-            // v
+            //   0 1 2 3 4 5 6 7
+            //       v
             // 0 0 0 0 0 0 0 0 0
             // 1 0 0 0 0 0 0 0 0
             // 2 0 0 1 0 0 0 0 0 <

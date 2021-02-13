@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ReversiRestApi
@@ -13,6 +14,7 @@ namespace ReversiRestApi
             Spel spel1 = new Spel();
             Spel spel2 = new Spel();
             Spel spel3 = new Spel();
+            spel1.Token = "test";
             spel1.Speler1Token = "abcdef";
             spel1.Omschrijving = "Potje snel reversi, dus niet lang nadenken";
             spel2.Speler1Token = "ghijkl";   
@@ -33,9 +35,28 @@ namespace ReversiRestApi
             return Spellen;
         }
         
-        public Spel GetSpel(string spelToken)
+        public Spel? GetSpel(string spelToken)
         {
-            return Spellen.First(spel => spel.Token == spelToken);
+            try
+            {
+                return Spellen.First(spel => spel.Token == spelToken);
+            }
+            catch (InvalidOperationException _)
+            {
+                return null;
+            }
+        }
+
+        public Spel? GetSpelPlayer(string playerToken)
+        {
+            try
+            {
+                return Spellen.First(spel => spel.Speler1Token == playerToken);
+            }
+            catch (InvalidOperationException _)
+            {
+                return null;
+            } 
         }
     }
 }

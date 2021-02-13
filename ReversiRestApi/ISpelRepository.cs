@@ -6,6 +6,7 @@ namespace ReversiRestApi
     {
         void AddSpel(Spel spel);   
         public List<Spel> GetSpellen();   
-        Spel GetSpel(string spelToken);
+        Spel? GetSpel(string spelToken);
+        Spel? GetSpelPlayer(string playerToken);
     }
 }

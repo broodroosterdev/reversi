@@ -50,5 +50,26 @@ namespace ReversiTest
             Assert.AreEqual(4, repo.Spellen.Count);
         }
 
+        [Test]
+        public void GetSpel_ReturnsExisting()
+        {
+            var repo = new SpelRepository();
+            var controller = new SpelController(repo);
+            var result = controller.GetSpel("test") as OkObjectResult;
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            Assert.AreEqual("test", ((Spel) result.Value).Token);
+        }
+
+        [Test]
+        public void GetSpel_ErrorsOnNonExisting()
+        {
+            var repo = new SpelRepository();
+            var controller = new SpelController(repo);
+            var result = controller.GetSpel("doesnt-exist") as NotFoundResult;
+            Assert.NotNull(result);
+            Assert.AreEqual(StatusCodes.Status404NotFound, result.StatusCode);
+        }
+
     }
 }

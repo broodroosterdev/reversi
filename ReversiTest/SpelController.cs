@@ -6,6 +6,7 @@ using NSubstitute;
 using NUnit.Framework;
 using ReversiRestApi;
 using ReversiRestApi.Controllers;
+using ReversiRestApi.schemas;
 
 namespace ReversiTest
 {
@@ -37,6 +38,16 @@ namespace ReversiTest
             var spellen = (result.Value as IEnumerable<string>).ToList();
             Assert.AreEqual(1, spellen.Count);
             Assert.AreEqual(_spelWithoutSecondPlayer.Omschrijving, spellen[0]);
+        }
+
+        [Test]
+        public void NieuwSpel_AddsToRepo()
+        {
+            var repo = new SpelRepository();
+            var controller = new SpelController(repo);
+            var result = controller.NieuwSpel(new NieuwSpel() {omschrijving = "omschrijving", spelerToken = "token"}) as OkResult;
+            Assert.AreEqual(200, result.StatusCode);
+            Assert.AreEqual(4, repo.Spellen.Count);
         }
 
     }

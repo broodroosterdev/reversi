@@ -17,7 +17,7 @@ namespace ReversiRestApi
             (-1, 1)
         };
 
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public string Omschrijving { get; set; }
         public string Token { get; set; }
         public string Speler1Token { get; set; }

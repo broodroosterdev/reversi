@@ -1,8 +1,10 @@
-﻿namespace ReversiRestApi
+﻿using System;
+
+namespace ReversiRestApi
 {
     public interface ISpel
     {
-        int ID { get; set; }
+        Guid ID { get; set; }
         string Omschrijving { get; set; }
         
         //het unieke token van het spel

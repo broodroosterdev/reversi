@@ -8,7 +8,7 @@ namespace ReversiTest
 {
     public class SpelSpelerControllerTest
     {
-        private SpelSpelerController _controller = new SpelSpelerController(new SpelRepository());
+        private GamePlayerController _controller = new GamePlayerController(new SpelRepository());
 
         [Test]
         public void GetSpelOfPlayer_ReturnsGameOfPlayer()
@@ -16,7 +16,7 @@ namespace ReversiTest
             var result = _controller.GetSpelOfPlayer("abcdef") as OkObjectResult;
             Assert.NotNull(result);
             Assert.NotNull(result.Value);
-            Assert.AreEqual("abcdef", ((Spel) result.Value).Speler1Token);
+            Assert.AreEqual("abcdef", ((Game) result.Value).Player1Token);
         }
 
         [Test]

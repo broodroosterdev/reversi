@@ -13,7 +13,7 @@ namespace ReversiTest
         public void ZetMogelijk_BuitenBord_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             //   0 1 2 3 4 5 6 7
             //                  v
             // 0 0 0 0 0 0 0 0 0
@@ -26,8 +26,8 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             //                   <
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(8, 8);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(8, 8);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -35,7 +35,7 @@ namespace ReversiTest
         public void ZetMogelijk_StartSituatieZet23Zwart_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 0 0 0 0 0
@@ -47,8 +47,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(2, 3);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(2, 3);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -57,7 +57,7 @@ namespace ReversiTest
         public void ZetMogelijk_StartSituatieZet23Wit_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 0 0 0 0 0
@@ -69,8 +69,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(2, 3);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(2, 3);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -78,9 +78,9 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 2 0 0 0 0 <
@@ -92,8 +92,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(0, 3);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -102,9 +102,9 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 1 0 0 0 0 <
@@ -116,8 +116,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(0, 3);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(0, 3);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -125,14 +125,14 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandBovenEnTotBenedenReedsGevuld_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[7, 3] = Color.Black;
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 2 0 0 0 0 <
@@ -144,8 +144,8 @@ namespace ReversiTest
             // 6 0 0 0 1 0 0 0 0
             // 7 0 0 0 2 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(0, 3);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -153,14 +153,14 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandBovenEnTotBenedenReedsGevuld_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[7, 3] = Color.White;
             //   0 1 2 3 4 5 6 7
             //         v
             // 0 0 0 0 2 0 0 0 0 <
@@ -172,8 +172,8 @@ namespace ReversiTest
             // 6 0 0 0 1 0 0 0 0
             // 7 0 0 0 1 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(0, 3);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -181,9 +181,9 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechts_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             //   0 1 2 3 4 5 6 7
             //                 v
             // 0 0 0 0 2 0 0 0 0
@@ -195,8 +195,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(4, 7);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(4, 7);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -204,9 +204,9 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechts_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             //   0 1 2 3 4 5 6 7
             //                 v
             // 0 0 0 0 1 0 0 0 0
@@ -218,8 +218,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(4, 7);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(4, 7);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -227,14 +227,14 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsEnTotLinksReedsGevuld_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 0] = Kleur.Zwart;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 0] = Color.Black;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             //   0 1 2 3 4 5 6 7
             //                 v
             // 0 0 0 0 0 0 0 0 0
@@ -246,8 +246,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(4, 7);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(4, 7);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -255,14 +255,14 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsEnTotLinksReedsGevuld_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 0] = Kleur.Zwart;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 0] = Color.Black;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             //   0 1 2 3 4 5 6 7
             //                 v
             // 0 0 0 0 0 0 0 0 0
@@ -274,8 +274,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(4, 7);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(4, 7);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -293,7 +293,7 @@ namespace ReversiTest
         public void ZetMogelijk_StartSituatieZet22Wit_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             //   0 1 2 3 4 5 6 7
             //       v
             // 0 0 0 0 0 0 0 0 0
@@ -305,8 +305,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(2, 2);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(2, 2);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -314,7 +314,7 @@ namespace ReversiTest
         public void ZetMogelijk_StartSituatieZet22Zwart_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -326,8 +326,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(2, 2);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(2, 2);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -335,10 +335,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Zwart;
-            spel.Bord[1, 6] = Kleur.Zwart;
-            spel.Bord[5, 2] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 5] = Color.Black;
+            game.Board[1, 6] = Color.Black;
+            game.Board[5, 2] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 1 <
@@ -350,8 +350,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(0, 7);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(0, 7);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -359,10 +359,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Zwart;
-            spel.Bord[1, 6] = Kleur.Zwart;
-            spel.Bord[5, 2] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 5] = Color.Black;
+            game.Board[1, 6] = Color.Black;
+            game.Board[5, 2] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 2 <
@@ -374,8 +374,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(0, 7);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(0, 7);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -383,10 +383,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsOnder_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 2] = Kleur.Zwart;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 2] = Color.Black;
+            game.Board[5, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -398,8 +398,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 1 0
             // 7 0 0 0 0 0 0 0 2 <
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(7, 7);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(7, 7);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -407,10 +407,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandRechtsOnder_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 2] = Kleur.Zwart;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 2] = Color.Black;
+            game.Board[5, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0 <
@@ -422,8 +422,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 1 0
             // 7 0 0 0 0 0 0 0 1
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(7, 7);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(7, 7);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -431,10 +431,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandLinksBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[5, 5] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 2 0 0 0 0 0 0 0 <
@@ -446,8 +446,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(0, 0);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(0, 0);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -455,10 +455,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandLinksBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[5, 5] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 1 0 0 0 0 0 0 0 <
@@ -470,8 +470,8 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(0, 0);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(0, 0);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -479,10 +479,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandLinksOnder_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Zwart;
-            spel.Bord[6, 1] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[2, 5] = Color.White;
+            game.Board[5, 2] = Color.Black;
+            game.Board[6, 1] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -494,8 +494,8 @@ namespace ReversiTest
             // 6 0 2 0 0 0 0 0 0
             // 7 1 0 0 0 0 0 0 0 <
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.ZetMogelijk(7, 0);
+            game.Turn = Color.White;
+            var actual = game.MovePossible(7, 0);
             // Assert
             Assert.IsTrue(actual);
         }
@@ -503,10 +503,10 @@ namespace ReversiTest
         public void ZetMogelijk_ZetAanDeRandLinksOnder_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Zwart;
-            spel.Bord[6, 1] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[2, 5] = Color.White;
+            game.Board[5, 2] = Color.Black;
+            game.Board[6, 1] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0 <
@@ -518,8 +518,8 @@ namespace ReversiTest
             // 6 0 2 0 0 0 0 0 0
             // 7 2 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.ZetMogelijk(7, 0);
+            game.Turn = Color.Black;
+            var actual = game.MovePossible(7, 0);
             // Assert
             Assert.IsFalse(actual);
         }
@@ -528,7 +528,7 @@ namespace ReversiTest
         public void DoeZet_BuitenBord_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -541,21 +541,21 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             // 1 <
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(8, 8);
+            game.Turn = Color.White;
+            var actual = game.DoMove(8, 8);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.AandeBeurt);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Turn);
         }
         [Test]
         public void DoeZet_StartSituatieZet23Zwart_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             //       v
             // 0 0 0 0 0 0 0 0 0
@@ -567,21 +567,21 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(2, 3);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(2, 3);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.AandeBeurt);
+            Assert.AreEqual(Color.Black, game.Board[2, 3]);
+            Assert.AreEqual(Color.Black, game.Board[3, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Turn);
         }
 
         [Test]
         public void DoeZet_StartSituatieZet23Wit_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -593,24 +593,24 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(2, 3);
+            game.Turn = Color.White;
+            var actual = game.DoMove(2, 3);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.AandeBeurt);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.None, game.Board[2, 3]);
+            Assert.AreEqual(Color.White, game.Turn);
         }
         [Test]
         public void DoeZet_ZetAanDeRandBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 2 0 0 0 0 <
@@ -622,24 +622,24 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(0, 3);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[0, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[1, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.AandeBeurt);
+            Assert.AreEqual(Color.Black, game.Board[0, 3]);
+            Assert.AreEqual(Color.Black, game.Board[1, 3]);
+            Assert.AreEqual(Color.Black, game.Board[2, 3]);
+            Assert.AreEqual(Color.Black, game.Board[3, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Turn);
         }
         [Test]
         public void DoeZet_ZetAanDeRandBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 1 0 0 0 0 <
@@ -651,30 +651,30 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(0, 3);
+            game.Turn = Color.White;
+            var actual = game.DoMove(0, 3);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[1, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[0, 3]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[1, 3]);
+            Assert.AreEqual(Color.White, game.Board[2, 3]);
+            Assert.AreEqual(Color.None, game.Board[0, 3]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandBovenEnTotBenedenReedsGevuld_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[7, 3] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 2 0 0 0 0 <
@@ -686,31 +686,31 @@ namespace ReversiTest
             // 6 0 0 0 1 0 0 0 0
             // 7 0 0 0 2 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(0, 3);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[0, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[1, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[5, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[6, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[7, 3]);
+            Assert.AreEqual(Color.Black, game.Board[0, 3]);
+            Assert.AreEqual(Color.Black, game.Board[1, 3]);
+            Assert.AreEqual(Color.Black, game.Board[2, 3]);
+            Assert.AreEqual(Color.Black, game.Board[3, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[5, 3]);
+            Assert.AreEqual(Color.Black, game.Board[6, 3]);
+            Assert.AreEqual(Color.Black, game.Board[7, 3]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandBovenEnTotBenedenReedsGevuld_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[1, 3] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[7, 3] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 2 0 0 0 0 <
@@ -722,25 +722,25 @@ namespace ReversiTest
             // 6 0 0 0 1 0 0 0 0
             // 7 0 0 0 1 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(0, 3);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(0, 3);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[1, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 3]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[0, 3]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.White, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[1, 3]);
+            Assert.AreEqual(Color.White, game.Board[2, 3]);
+            Assert.AreEqual(Color.None, game.Board[0, 3]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechts_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -752,23 +752,23 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(4, 7);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(4, 7);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 5]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 6]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 7]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 5]);
+            Assert.AreEqual(Color.Black, game.Board[4, 6]);
+            Assert.AreEqual(Color.Black, game.Board[4, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechts_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 1 0 0 0 0
@@ -780,30 +780,30 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(4, 7);
+            game.Turn = Color.White;
+            var actual = game.DoMove(4, 7);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 5]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 6]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[4, 7]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 5]);
+            Assert.AreEqual(Color.White, game.Board[4, 6]);
+            Assert.AreEqual(Color.None, game.Board[4, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechtsEnTotLinksReedsGevuld_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 0] = Kleur.Zwart;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 0] = Color.Black;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -815,31 +815,31 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(4, 7);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(4, 7);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 0]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 1]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 2]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 5]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 6]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 7]);
+            Assert.AreEqual(Color.Black, game.Board[4, 0]);
+            Assert.AreEqual(Color.Black, game.Board[4, 1]);
+            Assert.AreEqual(Color.Black, game.Board[4, 2]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 5]);
+            Assert.AreEqual(Color.Black, game.Board[4, 6]);
+            Assert.AreEqual(Color.Black, game.Board[4, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechtsEnTotLinksReedsGevuld_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[4, 0] = Kleur.Zwart;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[4, 0] = Color.Black;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -851,20 +851,20 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(4, 7);
+            game.Turn = Color.White;
+            var actual = game.DoMove(4, 7);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 0]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 1]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 2]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 5]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 6]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[4, 7]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.White, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 0]);
+            Assert.AreEqual(Color.White, game.Board[4, 1]);
+            Assert.AreEqual(Color.White, game.Board[4, 2]);
+            Assert.AreEqual(Color.White, game.Board[4, 5]);
+            Assert.AreEqual(Color.White, game.Board[4, 6]);
+            Assert.AreEqual(Color.None, game.Board[4, 7]);
         }
         // 0 1 2 3 4 5 6 7
         //
@@ -880,7 +880,7 @@ namespace ReversiTest
         public void DoeZet_StartSituatieZet22Wit_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -892,21 +892,21 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(2, 2);
+            game.Turn = Color.White;
+            var actual = game.DoMove(2, 2);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[2, 2]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.None, game.Board[2, 2]);
         }
         [Test]
         public void DoeZet_StartSituatieZet22Zwart_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -918,24 +918,24 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(2, 2);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(2, 2);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[2, 2]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.None, game.Board[2, 2]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechtsBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Zwart;
-            spel.Bord[1, 6] = Kleur.Zwart;
-            spel.Bord[5, 2] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 5] = Color.Black;
+            game.Board[1, 6] = Color.Black;
+            game.Board[5, 2] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 1 <
@@ -947,25 +947,25 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(0, 7);
+            game.Turn = Color.White;
+            var actual = game.DoMove(0, 7);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[5, 2]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 5]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[1, 6]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[0, 7]);
+            Assert.AreEqual(Color.White, game.Board[5, 2]);
+            Assert.AreEqual(Color.White, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[3, 4]);
+            Assert.AreEqual(Color.White, game.Board[2, 5]);
+            Assert.AreEqual(Color.White, game.Board[1, 6]);
+            Assert.AreEqual(Color.White, game.Board[0, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechtsBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Zwart;
-            spel.Bord[1, 6] = Kleur.Zwart;
-            spel.Bord[5, 2] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 5] = Color.Black;
+            game.Board[1, 6] = Color.Black;
+            game.Board[5, 2] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 2 <
@@ -977,27 +977,27 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(0, 7);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(0, 7);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[1, 6]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 5]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[5, 2]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[0, 7]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[1, 6]);
+            Assert.AreEqual(Color.Black, game.Board[2, 5]);
+            Assert.AreEqual(Color.White, game.Board[5, 2]);
+            Assert.AreEqual(Color.None, game.Board[0, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandRechtsOnder_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 2] = Kleur.Zwart;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 2] = Color.Black;
+            game.Board[5, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -1009,26 +1009,26 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 1 0
             // 7 0 0 0 0 0 0 0 2 <
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(7, 7);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(7, 7);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 2]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[5, 5]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[6, 6]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[7, 7]);
+            Assert.AreEqual(Color.Black, game.Board[2, 2]);
+            Assert.AreEqual(Color.Black, game.Board[3, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[5, 5]);
+            Assert.AreEqual(Color.Black, game.Board[6, 6]);
+            Assert.AreEqual(Color.Black, game.Board[7, 7]);
         }
 
         [Test]
         public void DoeZet_ZetAanDeRandRechtsOnder_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 2] = Kleur.Zwart;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 2] = Color.Black;
+            game.Board[5, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -1040,27 +1040,27 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 1 0
             // 7 0 0 0 0 0 0 0 1 <
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(7, 7);
+            game.Turn = Color.White;
+            var actual = game.DoMove(7, 7);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 2]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[5, 5]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[6, 6]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[7, 7]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.Black, game.Board[2, 2]);
+            Assert.AreEqual(Color.White, game.Board[5, 5]);
+            Assert.AreEqual(Color.White, game.Board[6, 6]);
+            Assert.AreEqual(Color.None, game.Board[7, 7]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandLinksBoven_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[5, 5] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 2 0 0 0 0 0 0 0 <
@@ -1072,25 +1072,25 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(0, 0);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(0, 0);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[0, 0]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[1, 1]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[2, 2]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[5, 5]);
+            Assert.AreEqual(Color.Black, game.Board[0, 0]);
+            Assert.AreEqual(Color.Black, game.Board[1, 1]);
+            Assert.AreEqual(Color.Black, game.Board[2, 2]);
+            Assert.AreEqual(Color.Black, game.Board[3, 3]);
+            Assert.AreEqual(Color.Black, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[5, 5]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandLinksBoven_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[1, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[5, 5] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 1 0 0 0 0 0 0 0 <
@@ -1102,27 +1102,27 @@ namespace ReversiTest
             // 6 0 0 0 0 0 0 0 0
             // 7 0 0 0 0 0 0 0 0
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(0, 0);
+            game.Turn = Color.White;
+            var actual = game.DoMove(0, 0);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[1, 1]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 2]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[5, 5]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[0, 0]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[1, 1]);
+            Assert.AreEqual(Color.White, game.Board[2, 2]);
+            Assert.AreEqual(Color.Black, game.Board[5, 5]);
+            Assert.AreEqual(Color.None, game.Board[0, 0]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandLinksOnder_ReturnTrue()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Zwart;
-            spel.Bord[6, 1] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[2, 5] = Color.White;
+            game.Board[5, 2] = Color.Black;
+            game.Board[6, 1] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -1134,25 +1134,25 @@ namespace ReversiTest
             // 6 0 2 0 0 0 0 0 0
             // 7 1 0 0 0 0 0 0 0 <
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.DoeZet(7, 0);
+            game.Turn = Color.White;
+            var actual = game.DoMove(7, 0);
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[7, 0]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[6, 1]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[5, 2]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 5]);
+            Assert.AreEqual(Color.White, game.Board[7, 0]);
+            Assert.AreEqual(Color.White, game.Board[6, 1]);
+            Assert.AreEqual(Color.White, game.Board[5, 2]);
+            Assert.AreEqual(Color.White, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[3, 4]);
+            Assert.AreEqual(Color.White, game.Board[2, 5]);
         }
         [Test]
         public void DoeZet_ZetAanDeRandLinksOnder_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Zwart;
-            spel.Bord[6, 1] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[2, 5] = Color.White;
+            game.Board[5, 2] = Color.Black;
+            game.Board[6, 1] = Color.Black;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 0 0 0 0 0 0 0 0
@@ -1164,89 +1164,89 @@ namespace ReversiTest
             // 6 0 2 0 0 0 0 0 0
             // 7 2 0 0 0 0 0 0 0 <
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.DoeZet(7, 0);
+            game.Turn = Color.Black;
+            var actual = game.DoMove(7, 0);
             // Assert
             Assert.IsFalse(actual);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[3, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[4, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[3, 4]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[4, 3]);
-            Assert.AreEqual(Kleur.Wit, spel.Bord[2, 5]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[5, 2]);
-            Assert.AreEqual(Kleur.Zwart, spel.Bord[6, 1]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[7, 7]);
-            Assert.AreEqual(Kleur.Geen, spel.Bord[7, 0]);
+            Assert.AreEqual(Color.White, game.Board[3, 3]);
+            Assert.AreEqual(Color.White, game.Board[4, 4]);
+            Assert.AreEqual(Color.Black, game.Board[3, 4]);
+            Assert.AreEqual(Color.Black, game.Board[4, 3]);
+            Assert.AreEqual(Color.White, game.Board[2, 5]);
+            Assert.AreEqual(Color.Black, game.Board[5, 2]);
+            Assert.AreEqual(Color.Black, game.Board[6, 1]);
+            Assert.AreEqual(Color.None, game.Board[7, 7]);
+            Assert.AreEqual(Color.None, game.Board[7, 0]);
         }
         [Test]
         public void Pas_ZwartAanZetGeenZetMogelijk_ReturnTrueEnWisselBeurt()
         {
             // Arrange (zowel wit als zwart kunnen niet meer)
-            Spel spel = new Spel();
-            spel.Bord[0, 0] = Kleur.Wit;
-            spel.Bord[0, 1] = Kleur.Wit;
-            spel.Bord[0, 2] = Kleur.Wit;
-            spel.Bord[0, 3] = Kleur.Wit;
-            spel.Bord[0, 4] = Kleur.Wit;
-            spel.Bord[0, 5] = Kleur.Wit;
-            spel.Bord[0, 6] = Kleur.Wit;
-            spel.Bord[0, 7] = Kleur.Wit;
-            spel.Bord[1, 0] = Kleur.Wit;
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[1, 2] = Kleur.Wit;
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[1, 4] = Kleur.Wit;
-            spel.Bord[1, 5] = Kleur.Wit;
-            spel.Bord[1, 6] = Kleur.Wit;
-            spel.Bord[1, 7] = Kleur.Wit;
-            spel.Bord[2, 0] = Kleur.Wit;
-            spel.Bord[2, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[2, 4] = Kleur.Wit;
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[2, 6] = Kleur.Wit;
-            spel.Bord[2, 7] = Kleur.Wit;
-            spel.Bord[3, 0] = Kleur.Wit;
-            spel.Bord[3, 1] = Kleur.Wit;
-            spel.Bord[3, 2] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[3, 4] = Kleur.Wit;
-            spel.Bord[3, 5] = Kleur.Wit;
-            spel.Bord[3, 6] = Kleur.Wit;
-            spel.Bord[3, 7] = Kleur.Geen;
-            spel.Bord[4, 0] = Kleur.Wit;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Geen;
-            spel.Bord[4, 7] = Kleur.Geen;
-            spel.Bord[5, 0] = Kleur.Wit;
-            spel.Bord[5, 1] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[5, 4] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[5, 6] = Kleur.Geen;
-            spel.Bord[5, 7] = Kleur.Zwart;
-            spel.Bord[6, 0] = Kleur.Wit;
-            spel.Bord[6, 1] = Kleur.Wit;
-            spel.Bord[6, 2] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[6, 4] = Kleur.Wit;
-            spel.Bord[6, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
-            spel.Bord[6, 7] = Kleur.Geen;
-            spel.Bord[7, 0] = Kleur.Wit;
-            spel.Bord[7, 1] = Kleur.Wit;
-            spel.Bord[7, 2] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
-            spel.Bord[7, 4] = Kleur.Wit;
-            spel.Bord[7, 5] = Kleur.Wit;
-            spel.Bord[7, 6] = Kleur.Wit;
-            spel.Bord[7, 7] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[0, 0] = Color.White;
+            game.Board[0, 1] = Color.White;
+            game.Board[0, 2] = Color.White;
+            game.Board[0, 3] = Color.White;
+            game.Board[0, 4] = Color.White;
+            game.Board[0, 5] = Color.White;
+            game.Board[0, 6] = Color.White;
+            game.Board[0, 7] = Color.White;
+            game.Board[1, 0] = Color.White;
+            game.Board[1, 1] = Color.White;
+            game.Board[1, 2] = Color.White;
+            game.Board[1, 3] = Color.White;
+            game.Board[1, 4] = Color.White;
+            game.Board[1, 5] = Color.White;
+            game.Board[1, 6] = Color.White;
+            game.Board[1, 7] = Color.White;
+            game.Board[2, 0] = Color.White;
+            game.Board[2, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[2, 4] = Color.White;
+            game.Board[2, 5] = Color.White;
+            game.Board[2, 6] = Color.White;
+            game.Board[2, 7] = Color.White;
+            game.Board[3, 0] = Color.White;
+            game.Board[3, 1] = Color.White;
+            game.Board[3, 2] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[3, 4] = Color.White;
+            game.Board[3, 5] = Color.White;
+            game.Board[3, 6] = Color.White;
+            game.Board[3, 7] = Color.None;
+            game.Board[4, 0] = Color.White;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.None;
+            game.Board[4, 7] = Color.None;
+            game.Board[5, 0] = Color.White;
+            game.Board[5, 1] = Color.White;
+            game.Board[5, 2] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[5, 4] = Color.White;
+            game.Board[5, 5] = Color.White;
+            game.Board[5, 6] = Color.None;
+            game.Board[5, 7] = Color.Black;
+            game.Board[6, 0] = Color.White;
+            game.Board[6, 1] = Color.White;
+            game.Board[6, 2] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[6, 4] = Color.White;
+            game.Board[6, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
+            game.Board[6, 7] = Color.None;
+            game.Board[7, 0] = Color.White;
+            game.Board[7, 1] = Color.White;
+            game.Board[7, 2] = Color.White;
+            game.Board[7, 3] = Color.White;
+            game.Board[7, 4] = Color.White;
+            game.Board[7, 5] = Color.White;
+            game.Board[7, 6] = Color.White;
+            game.Board[7, 7] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 1 1 1 1 1 1 1 1
@@ -1258,81 +1258,81 @@ namespace ReversiTest
             // 6 1 1 1 1 1 1 1 0
             // 7 1 1 1 1 1 1 1 1
             // Act
-            spel.AandeBeurt = Kleur.Zwart;
-            var actual = spel.Pas();
+            game.Turn = Color.Black;
+            var actual = game.Pass();
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Wit, spel.AandeBeurt);
+            Assert.AreEqual(Color.White, game.Turn);
         }
         [Test]
         public void Pas_WitAanZetGeenZetMogelijk_ReturnTrueEnWisselBeurt()
         {
             // Arrange (zowel wit als zwart kunnen niet meer)
-            Spel spel = new Spel();
-            spel.Bord[0, 0] = Kleur.Wit;
-            spel.Bord[0, 1] = Kleur.Wit;
-            spel.Bord[0, 2] = Kleur.Wit;
-            spel.Bord[0, 3] = Kleur.Wit;
-            spel.Bord[0, 4] = Kleur.Wit;
-            spel.Bord[0, 5] = Kleur.Wit;
-            spel.Bord[0, 6] = Kleur.Wit;
-            spel.Bord[0, 7] = Kleur.Wit;
-            spel.Bord[1, 0] = Kleur.Wit;
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[1, 2] = Kleur.Wit;
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[1, 4] = Kleur.Wit;
-            spel.Bord[1, 5] = Kleur.Wit;
-            spel.Bord[1, 6] = Kleur.Wit;
-            spel.Bord[1, 7] = Kleur.Wit;
-            spel.Bord[2, 0] = Kleur.Wit;
-            spel.Bord[2, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[2, 4] = Kleur.Wit;
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[2, 6] = Kleur.Wit;
-            spel.Bord[2, 7] = Kleur.Wit;
-            spel.Bord[3, 0] = Kleur.Wit;
-            spel.Bord[3, 1] = Kleur.Wit;
-            spel.Bord[3, 2] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[3, 4] = Kleur.Wit;
-            spel.Bord[3, 5] = Kleur.Wit;
-            spel.Bord[3, 6] = Kleur.Wit;
-            spel.Bord[3, 7] = Kleur.Geen;
-            spel.Bord[4, 0] = Kleur.Wit;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Geen;
-            spel.Bord[4, 7] = Kleur.Geen;
-            spel.Bord[5, 0] = Kleur.Wit;
-            spel.Bord[5, 1] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[5, 4] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[5, 6] = Kleur.Geen;
-            spel.Bord[5, 7] = Kleur.Zwart;
-            spel.Bord[6, 0] = Kleur.Wit;
-            spel.Bord[6, 1] = Kleur.Wit;
-            spel.Bord[6, 2] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[6, 4] = Kleur.Wit;
-            spel.Bord[6, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
-            spel.Bord[6, 7] = Kleur.Geen;
-            spel.Bord[7, 0] = Kleur.Wit;
-            spel.Bord[7, 1] = Kleur.Wit;
-            spel.Bord[7, 2] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
-            spel.Bord[7, 4] = Kleur.Wit;
-            spel.Bord[7, 5] = Kleur.Wit;
-            spel.Bord[7, 6] = Kleur.Wit;
-            spel.Bord[7, 7] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[0, 0] = Color.White;
+            game.Board[0, 1] = Color.White;
+            game.Board[0, 2] = Color.White;
+            game.Board[0, 3] = Color.White;
+            game.Board[0, 4] = Color.White;
+            game.Board[0, 5] = Color.White;
+            game.Board[0, 6] = Color.White;
+            game.Board[0, 7] = Color.White;
+            game.Board[1, 0] = Color.White;
+            game.Board[1, 1] = Color.White;
+            game.Board[1, 2] = Color.White;
+            game.Board[1, 3] = Color.White;
+            game.Board[1, 4] = Color.White;
+            game.Board[1, 5] = Color.White;
+            game.Board[1, 6] = Color.White;
+            game.Board[1, 7] = Color.White;
+            game.Board[2, 0] = Color.White;
+            game.Board[2, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[2, 4] = Color.White;
+            game.Board[2, 5] = Color.White;
+            game.Board[2, 6] = Color.White;
+            game.Board[2, 7] = Color.White;
+            game.Board[3, 0] = Color.White;
+            game.Board[3, 1] = Color.White;
+            game.Board[3, 2] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[3, 4] = Color.White;
+            game.Board[3, 5] = Color.White;
+            game.Board[3, 6] = Color.White;
+            game.Board[3, 7] = Color.None;
+            game.Board[4, 0] = Color.White;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.None;
+            game.Board[4, 7] = Color.None;
+            game.Board[5, 0] = Color.White;
+            game.Board[5, 1] = Color.White;
+            game.Board[5, 2] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[5, 4] = Color.White;
+            game.Board[5, 5] = Color.White;
+            game.Board[5, 6] = Color.None;
+            game.Board[5, 7] = Color.Black;
+            game.Board[6, 0] = Color.White;
+            game.Board[6, 1] = Color.White;
+            game.Board[6, 2] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[6, 4] = Color.White;
+            game.Board[6, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
+            game.Board[6, 7] = Color.None;
+            game.Board[7, 0] = Color.White;
+            game.Board[7, 1] = Color.White;
+            game.Board[7, 2] = Color.White;
+            game.Board[7, 3] = Color.White;
+            game.Board[7, 4] = Color.White;
+            game.Board[7, 5] = Color.White;
+            game.Board[7, 6] = Color.White;
+            game.Board[7, 7] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 1 1 1 1 1 1 1 1
@@ -1344,81 +1344,81 @@ namespace ReversiTest
             // 6 1 1 1 1 1 1 1 0
             // 7 1 1 1 1 1 1 1 1
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.Pas();
+            game.Turn = Color.White;
+            var actual = game.Pass();
             // Assert
             Assert.IsTrue(actual);
-            Assert.AreEqual(Kleur.Zwart, spel.AandeBeurt);
+            Assert.AreEqual(Color.Black, game.Turn);
         }
         [Test]
         public void Afgelopen_GeenZetMogelijk_ReturnTrue()
         {
             // Arrange (zowel wit als zwart kunnen niet meer)
-            Spel spel = new Spel();
-            spel.Bord[0, 0] = Kleur.Wit;
-            spel.Bord[0, 1] = Kleur.Wit;
-            spel.Bord[0, 2] = Kleur.Wit;
-            spel.Bord[0, 3] = Kleur.Wit;
-            spel.Bord[0, 4] = Kleur.Wit;
-            spel.Bord[0, 5] = Kleur.Wit;
-            spel.Bord[0, 6] = Kleur.Wit;
-            spel.Bord[0, 7] = Kleur.Wit;
-            spel.Bord[1, 0] = Kleur.Wit;
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[1, 2] = Kleur.Wit;
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[1, 4] = Kleur.Wit;
-            spel.Bord[1, 5] = Kleur.Wit;
-            spel.Bord[1, 6] = Kleur.Wit;
-            spel.Bord[1, 7] = Kleur.Wit;
-            spel.Bord[2, 0] = Kleur.Wit;
-            spel.Bord[2, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[2, 4] = Kleur.Wit;
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[2, 6] = Kleur.Wit;
-            spel.Bord[2, 7] = Kleur.Wit;
-            spel.Bord[3, 0] = Kleur.Wit;
-            spel.Bord[3, 1] = Kleur.Wit;
-            spel.Bord[3, 2] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[3, 4] = Kleur.Wit;
-            spel.Bord[3, 5] = Kleur.Wit;
-            spel.Bord[3, 6] = Kleur.Wit;
-            spel.Bord[3, 7] = Kleur.Geen;
-            spel.Bord[4, 0] = Kleur.Wit;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Geen;
-            spel.Bord[4, 7] = Kleur.Geen;
-            spel.Bord[5, 0] = Kleur.Wit;
-            spel.Bord[5, 1] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[5, 4] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[5, 6] = Kleur.Geen;
-            spel.Bord[5, 7] = Kleur.Zwart;
-            spel.Bord[6, 0] = Kleur.Wit;
-            spel.Bord[6, 1] = Kleur.Wit;
-            spel.Bord[6, 2] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[6, 4] = Kleur.Wit;
-            spel.Bord[6, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
-            spel.Bord[6, 7] = Kleur.Geen;
-            spel.Bord[7, 0] = Kleur.Wit;
-            spel.Bord[7, 1] = Kleur.Wit;
-            spel.Bord[7, 2] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
-            spel.Bord[7, 4] = Kleur.Wit;
-            spel.Bord[7, 5] = Kleur.Wit;
-            spel.Bord[7, 6] = Kleur.Wit;
-            spel.Bord[7, 7] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[0, 0] = Color.White;
+            game.Board[0, 1] = Color.White;
+            game.Board[0, 2] = Color.White;
+            game.Board[0, 3] = Color.White;
+            game.Board[0, 4] = Color.White;
+            game.Board[0, 5] = Color.White;
+            game.Board[0, 6] = Color.White;
+            game.Board[0, 7] = Color.White;
+            game.Board[1, 0] = Color.White;
+            game.Board[1, 1] = Color.White;
+            game.Board[1, 2] = Color.White;
+            game.Board[1, 3] = Color.White;
+            game.Board[1, 4] = Color.White;
+            game.Board[1, 5] = Color.White;
+            game.Board[1, 6] = Color.White;
+            game.Board[1, 7] = Color.White;
+            game.Board[2, 0] = Color.White;
+            game.Board[2, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[2, 4] = Color.White;
+            game.Board[2, 5] = Color.White;
+            game.Board[2, 6] = Color.White;
+            game.Board[2, 7] = Color.White;
+            game.Board[3, 0] = Color.White;
+            game.Board[3, 1] = Color.White;
+            game.Board[3, 2] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[3, 4] = Color.White;
+            game.Board[3, 5] = Color.White;
+            game.Board[3, 6] = Color.White;
+            game.Board[3, 7] = Color.None;
+            game.Board[4, 0] = Color.White;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.None;
+            game.Board[4, 7] = Color.None;
+            game.Board[5, 0] = Color.White;
+            game.Board[5, 1] = Color.White;
+            game.Board[5, 2] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[5, 4] = Color.White;
+            game.Board[5, 5] = Color.White;
+            game.Board[5, 6] = Color.None;
+            game.Board[5, 7] = Color.Black;
+            game.Board[6, 0] = Color.White;
+            game.Board[6, 1] = Color.White;
+            game.Board[6, 2] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[6, 4] = Color.White;
+            game.Board[6, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
+            game.Board[6, 7] = Color.None;
+            game.Board[7, 0] = Color.White;
+            game.Board[7, 1] = Color.White;
+            game.Board[7, 2] = Color.White;
+            game.Board[7, 3] = Color.White;
+            game.Board[7, 4] = Color.White;
+            game.Board[7, 5] = Color.White;
+            game.Board[7, 6] = Color.White;
+            game.Board[7, 7] = Color.White;
             // 0 1 2 3 4 5 6 7
             // v
             // 0 1 1 1 1 1 1 1 1
@@ -1430,8 +1430,8 @@ namespace ReversiTest
             // 6 1 1 1 1 1 1 1 0
             // 7 1 1 1 1 1 1 1 1
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.Afgelopen();
+            game.Turn = Color.White;
+            var actual = game.Ended();
             // Assert
             Assert.IsTrue(actual);
         }
@@ -1439,71 +1439,71 @@ namespace ReversiTest
         public void Afgelopen_GeenZetMogelijkAllesBezet_ReturnTrue()
         {
             // Arrange (zowel wit als zwart kunnen niet meer)
-            Spel spel = new Spel();
-            spel.Bord[0, 0] = Kleur.Wit;
-            spel.Bord[0, 1] = Kleur.Wit;
-            spel.Bord[0, 2] = Kleur.Wit;
-            spel.Bord[0, 3] = Kleur.Wit;
-            spel.Bord[0, 4] = Kleur.Wit;
-            spel.Bord[0, 5] = Kleur.Wit;
-            spel.Bord[0, 6] = Kleur.Wit;
-            spel.Bord[0, 7] = Kleur.Wit;
-            spel.Bord[1, 0] = Kleur.Wit;
-            spel.Bord[1, 1] = Kleur.Wit;
-            spel.Bord[1, 2] = Kleur.Wit;
-            spel.Bord[1, 3] = Kleur.Wit;
-            spel.Bord[1, 4] = Kleur.Wit;
-            spel.Bord[1, 5] = Kleur.Wit;
-            spel.Bord[1, 6] = Kleur.Wit;
-            spel.Bord[1, 7] = Kleur.Wit;
-            spel.Bord[2, 0] = Kleur.Wit;
-            spel.Bord[2, 1] = Kleur.Wit;
-            spel.Bord[2, 2] = Kleur.Wit;
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[2, 4] = Kleur.Wit;
-            spel.Bord[2, 5] = Kleur.Wit;
-            spel.Bord[2, 6] = Kleur.Wit;
-            spel.Bord[2, 7] = Kleur.Wit;
-            spel.Bord[3, 0] = Kleur.Wit;
-            spel.Bord[3, 1] = Kleur.Wit;
-            spel.Bord[3, 2] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[3, 4] = Kleur.Wit;
-            spel.Bord[3, 5] = Kleur.Wit;
-            spel.Bord[3, 6] = Kleur.Wit;
-            spel.Bord[3, 7] = Kleur.Wit;
-            spel.Bord[4, 0] = Kleur.Wit;
-            spel.Bord[4, 1] = Kleur.Wit;
-            spel.Bord[4, 2] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Wit;
-            spel.Bord[4, 5] = Kleur.Wit;
-            spel.Bord[4, 6] = Kleur.Zwart;
-            spel.Bord[4, 7] = Kleur.Zwart;
-            spel.Bord[5, 0] = Kleur.Wit;
-            spel.Bord[5, 1] = Kleur.Wit;
-            spel.Bord[5, 2] = Kleur.Wit;
-            spel.Bord[5, 3] = Kleur.Wit;
-            spel.Bord[5, 4] = Kleur.Wit;
-            spel.Bord[5, 5] = Kleur.Wit;
-            spel.Bord[5, 6] = Kleur.Zwart;
-            spel.Bord[5, 7] = Kleur.Zwart;
-            spel.Bord[6, 0] = Kleur.Wit;
-            spel.Bord[6, 1] = Kleur.Wit;
-            spel.Bord[6, 2] = Kleur.Wit;
-            spel.Bord[6, 3] = Kleur.Wit;
-            spel.Bord[6, 4] = Kleur.Wit;
-            spel.Bord[6, 5] = Kleur.Wit;
-            spel.Bord[6, 6] = Kleur.Wit;
-            spel.Bord[6, 7] = Kleur.Zwart;
-            spel.Bord[7, 0] = Kleur.Wit;
-            spel.Bord[7, 1] = Kleur.Wit;
-            spel.Bord[7, 2] = Kleur.Wit;
-            spel.Bord[7, 3] = Kleur.Wit;
-            spel.Bord[7, 4] = Kleur.Wit;
-            spel.Bord[7, 5] = Kleur.Wit;
-            spel.Bord[7, 6] = Kleur.Wit;
-            spel.Bord[7, 7] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[0, 0] = Color.White;
+            game.Board[0, 1] = Color.White;
+            game.Board[0, 2] = Color.White;
+            game.Board[0, 3] = Color.White;
+            game.Board[0, 4] = Color.White;
+            game.Board[0, 5] = Color.White;
+            game.Board[0, 6] = Color.White;
+            game.Board[0, 7] = Color.White;
+            game.Board[1, 0] = Color.White;
+            game.Board[1, 1] = Color.White;
+            game.Board[1, 2] = Color.White;
+            game.Board[1, 3] = Color.White;
+            game.Board[1, 4] = Color.White;
+            game.Board[1, 5] = Color.White;
+            game.Board[1, 6] = Color.White;
+            game.Board[1, 7] = Color.White;
+            game.Board[2, 0] = Color.White;
+            game.Board[2, 1] = Color.White;
+            game.Board[2, 2] = Color.White;
+            game.Board[2, 3] = Color.White;
+            game.Board[2, 4] = Color.White;
+            game.Board[2, 5] = Color.White;
+            game.Board[2, 6] = Color.White;
+            game.Board[2, 7] = Color.White;
+            game.Board[3, 0] = Color.White;
+            game.Board[3, 1] = Color.White;
+            game.Board[3, 2] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[3, 4] = Color.White;
+            game.Board[3, 5] = Color.White;
+            game.Board[3, 6] = Color.White;
+            game.Board[3, 7] = Color.White;
+            game.Board[4, 0] = Color.White;
+            game.Board[4, 1] = Color.White;
+            game.Board[4, 2] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[4, 4] = Color.White;
+            game.Board[4, 5] = Color.White;
+            game.Board[4, 6] = Color.Black;
+            game.Board[4, 7] = Color.Black;
+            game.Board[5, 0] = Color.White;
+            game.Board[5, 1] = Color.White;
+            game.Board[5, 2] = Color.White;
+            game.Board[5, 3] = Color.White;
+            game.Board[5, 4] = Color.White;
+            game.Board[5, 5] = Color.White;
+            game.Board[5, 6] = Color.Black;
+            game.Board[5, 7] = Color.Black;
+            game.Board[6, 0] = Color.White;
+            game.Board[6, 1] = Color.White;
+            game.Board[6, 2] = Color.White;
+            game.Board[6, 3] = Color.White;
+            game.Board[6, 4] = Color.White;
+            game.Board[6, 5] = Color.White;
+            game.Board[6, 6] = Color.White;
+            game.Board[6, 7] = Color.Black;
+            game.Board[7, 0] = Color.White;
+            game.Board[7, 1] = Color.White;
+            game.Board[7, 2] = Color.White;
+            game.Board[7, 3] = Color.White;
+            game.Board[7, 4] = Color.White;
+            game.Board[7, 5] = Color.White;
+            game.Board[7, 6] = Color.White;
+            game.Board[7, 7] = Color.White;
             // 0 1 2 3 4 5 6 7
             //
             // 0 1 1 1 1 1 1 1 1
@@ -1515,8 +1515,8 @@ namespace ReversiTest
             // 6 1 1 1 1 1 1 1 2
             // 7 1 1 1 1 1 1 1 1
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.Afgelopen();
+            game.Turn = Color.White;
+            var actual = game.Ended();
             // Assert
             Assert.IsTrue(actual);
         }
@@ -1524,7 +1524,7 @@ namespace ReversiTest
         public void Afgelopen_WelZetMogelijk_ReturnFalse()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             //
             // 0 0 0 0 0 0 0 0 0
@@ -1537,8 +1537,8 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             //
             // Act
-            spel.AandeBeurt = Kleur.Wit;
-            var actual = spel.Afgelopen();
+            game.Turn = Color.White;
+            var actual = game.Ended();
             // Assert
             Assert.IsFalse(actual);
         }
@@ -1546,7 +1546,7 @@ namespace ReversiTest
         public void OverwegendeKleur_Gelijk_ReturnKleurGeen()
         {
             // Arrange
-            Spel spel = new Spel();
+            Game game = new Game();
             // 0 1 2 3 4 5 6 7
             //
             // 0 0 0 0 0 0 0 0 0
@@ -1559,20 +1559,20 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             //
             // Act
-            var actual = spel.OverwegendeKleur();
+            var actual = game.DominantColor();
             // Assert
-            Assert.AreEqual(Kleur.Geen, actual);
+            Assert.AreEqual(Color.None, actual);
         }
         [Test]
         public void OverwegendeKleur_Zwart_ReturnKleurZwart()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 3] = Kleur.Zwart;
-            spel.Bord[3, 3] = Kleur.Zwart;
-            spel.Bord[4, 3] = Kleur.Zwart;
-            spel.Bord[3, 4] = Kleur.Zwart;
-            spel.Bord[4, 4] = Kleur.Wit;
+            Game game = new Game();
+            game.Board[2, 3] = Color.Black;
+            game.Board[3, 3] = Color.Black;
+            game.Board[4, 3] = Color.Black;
+            game.Board[3, 4] = Color.Black;
+            game.Board[4, 4] = Color.White;
             // 0 1 2 3 4 5 6 7
             //
             // 0 0 0 0 0 0 0 0 0
@@ -1585,20 +1585,20 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             //
             // Act
-            var actual = spel.OverwegendeKleur();
+            var actual = game.DominantColor();
             // Assert
-            Assert.AreEqual(Kleur.Zwart, actual);
+            Assert.AreEqual(Color.Black, actual);
         }
         [Test]
         public void OverwegendeKleur_Wit_ReturnKleurWit()
         {
             // Arrange
-            Spel spel = new Spel();
-            spel.Bord[2, 3] = Kleur.Wit;
-            spel.Bord[3, 3] = Kleur.Wit;
-            spel.Bord[4, 3] = Kleur.Wit;
-            spel.Bord[3, 4] = Kleur.Wit;
-            spel.Bord[4, 4] = Kleur.Zwart;
+            Game game = new Game();
+            game.Board[2, 3] = Color.White;
+            game.Board[3, 3] = Color.White;
+            game.Board[4, 3] = Color.White;
+            game.Board[3, 4] = Color.White;
+            game.Board[4, 4] = Color.Black;
             // 0 1 2 3 4 5 6 7
             //
             // 0 0 0 0 0 0 0 0 0
@@ -1611,9 +1611,9 @@ namespace ReversiTest
             // 7 0 0 0 0 0 0 0 0
             //
             // Act
-            var actual = spel.OverwegendeKleur();
+            var actual = game.DominantColor();
             // Assert
-            Assert.AreEqual(Kleur.Wit, actual);
+            Assert.AreEqual(Color.White, actual);
         }
     }
 }

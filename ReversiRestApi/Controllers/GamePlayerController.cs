@@ -3,11 +3,11 @@
 namespace ReversiRestApi.Controllers
 {
     [Route("api/SpelSpeler")]
-    public class SpelSpelerController : Controller
+    public class GamePlayerController : Controller
     {
         private readonly ISpelRepository repository;
 
-        public SpelSpelerController(ISpelRepository repository)
+        public GamePlayerController(ISpelRepository repository)
         {
             this.repository = repository;
         }

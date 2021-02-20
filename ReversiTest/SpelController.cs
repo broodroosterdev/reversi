@@ -12,12 +12,12 @@ namespace ReversiTest
 {
     public class SpelControllerTest
     {
-        private SpelController _spelController;
+        private GameController _gameController;
         private ISpelRepository _repo;
-        private List<Spel> _spellen = new List<Spel>();
+        private List<Game> _spellen = new List<Game>();
         
-        private Spel _spelWithSecondPlayer = new Spel() {Speler1Token = "test", Speler2Token = "test", Omschrijving = "test"};
-        private Spel _spelWithoutSecondPlayer = new Spel() {Speler1Token = "test", Omschrijving = "test"};
+        private Game _gameWithSecondPlayer = new Game() {Player1Token = "test", Player2Token = "test", Description = "test"};
+        private Game _gameWithoutSecondPlayer = new Game() {Player1Token = "test", Description = "test"};
         
         
         [SetUp]
@@ -25,27 +25,27 @@ namespace ReversiTest
         {
             _repo = Substitute.For<ISpelRepository>();
             
-            _spelController = new SpelController(_repo);
+            _gameController = new GameController(_repo);
         }
 
         [Test]
         public void GetSpellenMetWachtendeSpeler_ReturnsOmschrijvingen()
         {
-            _repo.GetSpellen().Returns(new List<Spel>(){_spelWithSecondPlayer, _spelWithoutSecondPlayer});
-            var response = _spelController.GetSpelOmschrijvingenVanSpellenMetWachtendeSpeler();
+            _repo.GetSpellen().Returns(new List<Game>(){_gameWithSecondPlayer, _gameWithoutSecondPlayer});
+            var response = _gameController.GetSpelOmschrijvingenVanSpellenMetWachtendeSpeler();
             var result = response.Result as OkObjectResult;
             Assert.IsNotNull(result);
             var spellen = (result.Value as IEnumerable<string>).ToList();
             Assert.AreEqual(1, spellen.Count);
-            Assert.AreEqual(_spelWithoutSecondPlayer.Omschrijving, spellen[0]);
+            Assert.AreEqual(_gameWithoutSecondPlayer.Description, spellen[0]);
         }
 
         [Test]
         public void NieuwSpel_AddsToRepo()
         {
             var repo = new SpelRepository();
-            var controller = new SpelController(repo);
-            var result = controller.NieuwSpel(new NieuwSpel() {omschrijving = "omschrijving", spelerToken = "token"}) as OkResult;
+            var controller = new GameController(repo);
+            var result = controller.NieuwSpel(new NewGame() {Description = "omschrijving", PlayerToken = "token"}) as OkResult;
             Assert.AreEqual(200, result.StatusCode);
             Assert.AreEqual(4, repo.Spellen.Count);
         }
@@ -54,18 +54,18 @@ namespace ReversiTest
         public void GetSpel_ReturnsExisting()
         {
             var repo = new SpelRepository();
-            var controller = new SpelController(repo);
+            var controller = new GameController(repo);
             var result = controller.GetSpel("test") as OkObjectResult;
             Assert.NotNull(result);
             Assert.NotNull(result.Value);
-            Assert.AreEqual("test", ((Spel) result.Value).Token);
+            Assert.AreEqual("test", ((Game) result.Value).Token);
         }
 
         [Test]
         public void GetSpel_ErrorsOnNonExisting()
         {
             var repo = new SpelRepository();
-            var controller = new SpelController(repo);
+            var controller = new GameController(repo);
             var result = controller.GetSpel("doesnt-exist") as NotFoundResult;
             Assert.NotNull(result);
             Assert.AreEqual(StatusCodes.Status404NotFound, result.StatusCode);

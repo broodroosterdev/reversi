@@ -4,9 +4,9 @@ namespace ReversiRestApi
 {
     public interface ISpelRepository
     {
-        void AddSpel(Spel spel);   
-        public List<Spel> GetSpellen();   
-        Spel? GetSpel(string spelToken);
-        Spel? GetSpelPlayer(string playerToken);
+        void AddSpel(Game game);   
+        public List<Game> GetSpellen();   
+        Game? GetSpel(string spelToken);
+        Game? GetSpelPlayer(string playerToken);
     }
 }

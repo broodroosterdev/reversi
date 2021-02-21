@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +26,15 @@ namespace ReversiRestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ISpelRepository, SpelRepository>();
+            services.AddDbContext<RestApiContext>(options =>
+            {
+                options.UseSqlServer(
+                    "Server=test-debian.fritz.box,1433;Database=ReversiRest;User Id=SA;Password=NCDfydN8DjJS6cB6;");
+            });
+            var builder = new DbContextOptionsBuilder<RestApiContext>();
+            builder.UseSqlServer(
+                "Server=test-debian.fritz.box,1433;Database=ReversiRest;User Id=SA;Password=NCDfydN8DjJS6cB6;");
+            services.AddSingleton<ISpelRepository, GameAccessLayer>(services => new GameAccessLayer(new RestApiContext(builder.Options)));
             services
                 .AddControllers()
                 .AddNewtonsoftJson();

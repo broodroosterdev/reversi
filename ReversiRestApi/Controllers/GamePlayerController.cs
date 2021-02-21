@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ReversiRestApi.Controllers
 {
@@ -14,9 +15,9 @@ namespace ReversiRestApi.Controllers
 
         // GET api/SpelSpeler/<spelertoken>
         [HttpGet("{spelertoken}")]
-        public IActionResult GetSpelOfPlayer(string spelertoken)
+        public async Task<IActionResult> GetSpelOfPlayer(string spelertoken)
         {
-            var spel = repository.GetSpelPlayer(spelertoken);
+            var spel = await repository.GetSpelPlayer(spelertoken);
             if (spel == null) return NotFound();
             return Ok(spel);
         }

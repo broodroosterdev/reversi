@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ReversiRestApi
 {
@@ -26,38 +27,48 @@ namespace ReversiRestApi
             Spellen = new List<Game> {spel1, spel2, spel3};
         }
         
-        public void AddSpel(Game game)    
-        {   
-            Spellen.Add(game);
+        public Task AddSpel(Game game)
+        {
+            return Task.Run(() =>
+            {
+                Spellen.Add(game);
+                
+            });
         }
 
-        public List<Game> GetSpellen()
+        public Task<List<Game>> GetSpellen()
         {
-            return Spellen;
+            return Task<List<Game>>.Factory.StartNew(() => Spellen);
         }
         
-        public Game? GetSpel(string spelToken)
+        public Task<Game?> GetSpel(string spelToken)
         {
-            try
+            return Task<Game?>.Factory.StartNew(() =>
             {
-                return Spellen.First(spel => spel.Token == spelToken);
-            }
-            catch (InvalidOperationException _)
-            {
-                return null;
-            }
+                try
+                {
+                    return Spellen.First(spel => spel.Token == spelToken);
+                }
+                catch (InvalidOperationException)
+                {
+                    return null;
+                }
+            });
         }
 
-        public Game? GetSpelPlayer(string playerToken)
+        public Task<Game?> GetSpelPlayer(string playerToken)
         {
-            try
+            return Task<Game?>.Factory.StartNew(() =>
             {
-                return Spellen.First(spel => spel.Player1Token == playerToken);
-            }
-            catch (InvalidOperationException _)
-            {
-                return null;
-            } 
+                try
+                {
+                    return Spellen.First(spel => spel.Player1Token == playerToken);
+                }
+                catch (InvalidOperationException)
+                {
+                    return null;
+                }
+            });
         }
     }
 }

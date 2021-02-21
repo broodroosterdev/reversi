@@ -4,13 +4,11 @@ namespace ReversiRestApi
 {
     public interface IGame
     {
-        int ID { get; set; }
-        string Description { get; set; }
-        
         //het unieke token van het spel
         string Token { get; set; }
-        string Player1Token { get; set; }
-        string Player2Token { get; set; }
+        string Description { get; set; }
+        string? Player1Token { get; set; }
+        string? Player2Token { get; set; }
         Color[,] Board { get; set; }   
         Color Turn { get; set; }  
         bool Pass(); 

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Innofactor.EfCoreJsonValueConverter;
 
 namespace ReversiRestApi
 {
     public class Game : IGame
     {
+        [NotMapped]
         private static readonly List<(int, int)> Sides = new List<(int, int)>()
         {
             (0, 1),
@@ -16,16 +20,21 @@ namespace ReversiRestApi
             (-1, 0),
             (-1, 1)
         };
-
-        public int ID { get; set; }
+        [Key]
+        public string Token { get; set; } 
+        
         public string Description { get; set; }
-        public string Token { get; set; }
         public string Player1Token { get; set; }
-        public string Player2Token { get; set; }
+        public string? Player2Token { get; set; }
+        
+        [JsonField]
         public Color[,] Board { get; set; }
         public Color Turn { get; set; }
+        
+        [NotMapped]
         public Color NotTurn => Turn == Color.White ? Color.Black : Color.White;
         
+        [JsonField]
         public Result? Result { get; set; }
         
         public Game()

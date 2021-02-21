@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
@@ -29,10 +30,10 @@ namespace ReversiTest
         }
 
         [Test]
-        public void GetSpellenMetWachtendeSpeler_ReturnsOmschrijvingen()
+        public async Task GetSpellenMetWachtendeSpeler_ReturnsOmschrijvingen()
         {
             _repo.GetSpellen().Returns(new List<Game>(){_gameWithSecondPlayer, _gameWithoutSecondPlayer});
-            var response = _gameController.GetSpelOmschrijvingenVanSpellenMetWachtendeSpeler();
+            var response = await _gameController.GetSpelOmschrijvingenVanSpellenMetWachtendeSpeler();
             var result = response.Result as OkObjectResult;
             Assert.IsNotNull(result);
             var spellen = (result.Value as IEnumerable<string>).ToList();
@@ -41,32 +42,32 @@ namespace ReversiTest
         }
 
         [Test]
-        public void NieuwSpel_AddsToRepo()
+        public async Task NieuwSpel_AddsToRepo()
         {
             var repo = new SpelRepository();
             var controller = new GameController(repo);
-            var result = controller.NieuwSpel(new NewGame() {Description = "omschrijving", PlayerToken = "token"}) as OkResult;
+            var result = await controller.NieuwSpel(new NewGame() {Description = "omschrijving", PlayerToken = "token"}) as OkResult;
             Assert.AreEqual(200, result.StatusCode);
             Assert.AreEqual(4, repo.Spellen.Count);
         }
 
         [Test]
-        public void GetSpel_ReturnsExisting()
+        public async Task GetSpel_ReturnsExisting()
         {
             var repo = new SpelRepository();
             var controller = new GameController(repo);
-            var result = controller.GetSpel("test") as OkObjectResult;
+            var result = await controller.GetSpel("test") as OkObjectResult;
             Assert.NotNull(result);
             Assert.NotNull(result.Value);
             Assert.AreEqual("test", ((Game) result.Value).Token);
         }
 
         [Test]
-        public void GetSpel_ErrorsOnNonExisting()
+        public async Task GetSpel_ErrorsOnNonExisting()
         {
             var repo = new SpelRepository();
             var controller = new GameController(repo);
-            var result = controller.GetSpel("doesnt-exist") as NotFoundResult;
+            var result = await controller.GetSpel("doesnt-exist") as NotFoundResult;
             Assert.NotNull(result);
             Assert.AreEqual(StatusCodes.Status404NotFound, result.StatusCode);
         }

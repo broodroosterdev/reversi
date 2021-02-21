@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ReversiRestApi
 {
     public interface ISpelRepository
     {
-        void AddSpel(Game game);   
-        public List<Game> GetSpellen();   
-        Game? GetSpel(string spelToken);
-        Game? GetSpelPlayer(string playerToken);
+        Task AddSpel(Game game);   
+        public Task<List<Game>> GetSpellen();   
+        Task<Game?> GetSpel(string spelToken);
+        Task<Game?> GetSpelPlayer(string playerToken);
     }
 }
